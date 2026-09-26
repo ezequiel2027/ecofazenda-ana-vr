@@ -275,38 +275,37 @@ export default function App() {
             );
 
           },
-
-
           onEnd: () => {
 
-            setFalando(false);
+  setFalando(false);
 
-            ocupadoRef.current =
-              false;
+  ocupadoRef.current = false;
+
+  // Libera a escuta anterior
+  recognitionRef.current = null;
+
+  if (
+    conversaAtivaRef.current
+  ) {
+
+    setStatus(
+      "Pode falar..."
+    );
+
+    setTimeout(() => {
+
+      recognitionRef.current = null;
+
+      iniciarEscutaAutomatica();
+
+    }, 700);
+
+  }
+
+},
 
 
-            /*
-              VOLTA A OUVIR SOZINHA
-            */
-
-            if (
-              conversaAtivaRef.current
-            ) {
-
-              setStatus(
-                "Pode falar..."
-              );
-
-
-              setTimeout(() => {
-
-                iniciarEscutaAutomatica();
-
-              }, 700);
-
-            }
-
-          },
+          
 
 
           onError: (mensagem) => {
